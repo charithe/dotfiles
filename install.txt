@@ -1,0 +1,10 @@
+Requirements
+=============
+
+- Vim 8.x
+    dnf install vim-x11 (or vim-gtk3 from PPA: https://launchpad.net/~jonathonf/+archive/ubuntu/vim)
+
+- Kitty
+    dnf copr enable oleastre/kitty-terminal
+    dnf install kitty
+
