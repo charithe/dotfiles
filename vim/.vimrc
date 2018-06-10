@@ -71,6 +71,8 @@ let g:airline#extensions#ale#enabled = 1
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufread,bufnewfile *.asm set filetype=nasm
+autocmd bufwritepost *.asm silent !nasmfmt %
 
 autocmd FileType qf wincmd J
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
@@ -96,6 +98,7 @@ set autoread
 set encoding=utf-8
 set scrolloff=3
 set autoindent
+set autoread
 set showmode
 set showcmd
 set hidden
