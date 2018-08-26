@@ -23,6 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 map <C-n> :cnext<CR>
@@ -62,7 +63,7 @@ let g:airline_theme='violet'
 let g:rustfmt_autosave = 1
 let g:ale_linters = {'go': ['gometalinter', 'gofmt'], 'rustr': ['rls','rustfmt']}
 let g:ale_go_gometalinter_options = '--fast'
-let g:ale_rust_rls_toolchain = 'stable'
+let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
 let g:ale_sign_error = '❌'
@@ -77,6 +78,7 @@ autocmd bufwritepost *.asm silent !nasmfmt %
 autocmd FileType qf wincmd J
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 set nocompatible
 set lazyredraw
@@ -113,8 +115,11 @@ set colorcolumn=120
 set completeopt=longest,menuone
 set updatetime=100
 set showbreak=↪\
-set listchars=tab:┆‧,eol:↲,nbsp:␣,trail:•,extends:❯,precedes:❮
+set listchars=tab:┆‧,space:‧,eol:↲,nbsp:␣,trail:•,extends:❯,precedes:❮
 set fillchars+=vert:│
+set undodir=~/.vim/undodir/
+set undofile
+set clipboard=unnamed
 
 highlight NonText ctermfg=30 guifg=#008787
 
