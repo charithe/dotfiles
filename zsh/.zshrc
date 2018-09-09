@@ -35,3 +35,5 @@ bindkey '^r' history-incremental-search-backward
 
 alias vim="gvim -v"
 alias vi="gvim -v"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
