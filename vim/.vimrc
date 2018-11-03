@@ -24,6 +24,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'jiangmiao/auto-pairs'
+Plug 'MattesGroeger/vim-bookmarks'
 call plug#end()
 
 map <C-n> :cnext<CR>
