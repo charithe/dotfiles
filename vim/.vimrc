@@ -24,7 +24,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'jiangmiao/auto-pairs'
-Plug 'MattesGroeger/vim-bookmarks'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 map <C-n> :cnext<CR>
@@ -56,6 +56,10 @@ let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
+let g:go_test_show_name = 1
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
 let g:ctrlp_working_path_mode = 0
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -71,6 +75,8 @@ let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
 let g:ale_sign_error = '❌'
 let g:airline#extensions#ale#enabled = 1
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd p
@@ -123,6 +129,8 @@ set fillchars+=vert:│
 set undodir=~/.vim/undodir/
 set undofile
 set clipboard=unnamed
+set splitright
+set splitbelow
 
 highlight NonText ctermfg=30 guifg=#008787
 

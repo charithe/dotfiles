@@ -7,6 +7,7 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
 zplug 'BrandonRoehl/zsh-clean'
+zplug 'zchee/zsh-completions'
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -35,6 +36,7 @@ bindkey '^r' history-incremental-search-backward
 
 alias vim="gvim -v"
 alias vi="gvim -v"
+alias k="kubectl"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -47,3 +49,5 @@ if [ -f '/home/cell/apps/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cell/ap
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/cell/apps/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cell/apps/google-cloud-sdk/completion.zsh.inc'; fi
+
+kitty + complete setup zsh | source /dev/stdin
