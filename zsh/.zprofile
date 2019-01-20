@@ -19,7 +19,7 @@ fi
 
 export EDITOR='vim'
 export VISUAL='vim'
-export PAGER='most'
+export PAGER='bat'
 
 #
 # Language

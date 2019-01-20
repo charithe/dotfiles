@@ -7,7 +7,7 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
 zplug 'BrandonRoehl/zsh-clean'
-zplug 'zchee/zsh-completions'
+zplug 'zchee/zsh-completions', use:'src/go/*.zsh'
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -38,16 +38,9 @@ alias vim="gvim -v"
 alias vi="gvim -v"
 alias k="kubectl"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export BAT_THEME="TwoDark"
+export BAT_STYLE="numbers,changes"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/cell/.sdkman"
-[[ -s "/home/cell/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cell/.sdkman/bin/sdkman-init.sh"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/cell/apps/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cell/apps/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/cell/apps/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cell/apps/google-cloud-sdk/completion.zsh.inc'; fi
-
+source /usr/share/fzf/shell/key-bindings.zsh
 kitty + complete setup zsh | source /dev/stdin
