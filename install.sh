@@ -5,7 +5,7 @@ set -euo pipefail
 core() {
     echo "Installing packages"
     sudo dnf -y copr enable gagbo/kitty-latest
-    sudo dnf -y install --refresh zsh vim-X11 vim-enhanced stow fzf ripgrep bat kitty
+    sudo dnf -y install --refresh zsh vim-X11 vim-enhanced stow fzf ripgrep fd-find bat kitty
 
     echo "Changing shell"
     chsh -s /bin/zsh

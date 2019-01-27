@@ -64,5 +64,5 @@ fi
 
 
 export GOPATH=$HOME/code/go
-export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.local/bin
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'

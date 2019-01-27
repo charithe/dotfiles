@@ -44,3 +44,7 @@ export BAT_STYLE="numbers,changes"
 
 source /usr/share/fzf/shell/key-bindings.zsh
 kitty + complete setup zsh | source /dev/stdin
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/cell/.sdkman"
+[[ -s "/home/cell/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cell/.sdkman/bin/sdkman-init.sh"
