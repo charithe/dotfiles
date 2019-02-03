@@ -25,6 +25,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'jiangmiao/auto-pairs'
 Plug 'hashivim/vim-terraform'
+Plug 'rakr/vim-one'
 call plug#end()
 
 map <C-n> :cnext<CR>
@@ -66,10 +67,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:NERDTreeWinPos = "right"
 let g:tagbar_left = 1
-let g:airline_theme='violet'
+let g:airline_theme='one'
 let g:rustfmt_autosave = 1
-let g:ale_linters = {'go': ['gometalinter', 'gofmt'], 'rust': ['rls','rustfmt']}
-let g:ale_go_gometalinter_options = '--fast'
+let g:ale_linters = {'go': ['golangci-lint'], 'rust': ['rls','rustfmt']}
+let g:ale_go_golangci_lint_package = 1
+let g:ale_go_golangci_lint_options = "--enable-all --fast"
 let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
@@ -126,22 +128,21 @@ set updatetime=100
 set showbreak=↪\
 set listchars=tab:┆‧,space:‧,eol:↲,nbsp:␣,trail:•,extends:❯,precedes:❮
 set fillchars+=vert:│
-set undodir=~/.vim/undodir/
+set undodir=~/.vim/data/undo//
+set backupdir=~/.vim/data/backup//
+set directory=~/.vim/data/swap//
 set undofile
 set clipboard=unnamed
 set splitright
 set splitbelow
+set termguicolors
 
-highlight NonText ctermfg=30 guifg=#008787
+"highlight NonText ctermfg=30 guifg=#008787
 
 syntax on
 filetype plugin indent on
 
-if (has("termguicolors"))
-    set termguicolors
-endif
-
-colorscheme space-vim-dark
-hi SpecialKey guifg=#3f3f3f
+colorscheme one
+"hi SpecialKey guifg=#3f3f3f
 
 call deoplete#custom#source('_', 'converters', ['converter_auto_delimiter', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu', 'converter_auto_paren'])
