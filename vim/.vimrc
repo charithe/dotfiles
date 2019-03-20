@@ -26,6 +26,10 @@ Plug 'sebastianmarkow/deoplete-rust'
 Plug 'jiangmiao/auto-pairs'
 Plug 'hashivim/vim-terraform'
 Plug 'rakr/vim-one'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'junegunn/fzf.vim'
+Plug 'ujihisa/neco-look'
 call plug#end()
 
 map <C-n> :cnext<CR>
@@ -47,6 +51,9 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#pointer = 1
+let g:deoplete#sources#go#builtin_objects = 1
+let g:deoplete#sources#go#unimported_packages = 1
 let g:deoplete#sources#rust#racer_binary= $HOME.'/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path= $HOME.'/git/rust/src'
 let g:go_fmt_command = "goimports"
@@ -69,6 +76,8 @@ let g:NERDTreeWinPos = "right"
 let g:tagbar_left = 1
 let g:airline_theme='one'
 let g:rustfmt_autosave = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_linters = {'go': ['golangci-lint'], 'rust': ['rls','rustfmt']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--enable-all --fast"
@@ -79,6 +88,9 @@ let g:ale_sign_error = '❌'
 let g:airline#extensions#ale#enabled = 1
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+
+call deoplete#custom#option('smart_case', v:true)
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd p
@@ -146,3 +158,11 @@ colorscheme one
 "hi SpecialKey guifg=#3f3f3f
 
 call deoplete#custom#source('_', 'converters', ['converter_auto_delimiter', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu', 'converter_auto_paren'])
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif

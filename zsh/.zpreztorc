@@ -27,6 +27,7 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
+  'git' \
   'environment' \
   'terminal' \
   'editor' \
@@ -36,14 +37,15 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'syntax-highlighting' \
-  'history-substring-search' 
+  'history-substring-search' \
+  'autosuggestions'
 
 #
 # Autosuggestions
 #
-
+zstyle ':prezto:module:autosuggestions' color 'yes'
 # Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:autosuggestions:color' found 'fg=025'
 
 #
 # Completions
@@ -114,7 +116,7 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'clean'
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
