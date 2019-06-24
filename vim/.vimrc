@@ -9,7 +9,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'bling/vim-airline'
@@ -29,7 +29,9 @@ Plug 'rakr/vim-one'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'junegunn/fzf.vim'
-Plug 'ujihisa/neco-look'
+"Plug 'ujihisa/neco-look'
+Plug 'uber/prototool', { 'rtp':'vim/prototool' }
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 map <C-n> :cnext<CR>
@@ -48,6 +50,7 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvis
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+let g:omni_sql_no_default_maps = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
@@ -57,6 +60,7 @@ let g:deoplete#sources#go#unimported_packages = 1
 let g:deoplete#sources#rust#racer_binary= $HOME.'/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path= $HOME.'/git/rust/src'
 let g:go_fmt_command = "goimports"
+let g:go_metalinter_command = "golangci-lint"
 let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -68,6 +72,8 @@ let g:go_test_show_name = 1
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_space_tab_error = 1
 let g:go_highlight_trailing_whitespace_error = 1
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 let g:ctrlp_working_path_mode = 0
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -77,14 +83,16 @@ let g:tagbar_left = 1
 let g:airline_theme='one'
 let g:rustfmt_autosave = 1
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_linters = {'go': ['golangci-lint'], 'rust': ['rls','rustfmt']}
+let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['rls','rustfmt'], 'proto': ['prototool-lint']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--enable-all --fast"
 let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
 let g:ale_sign_error = '❌'
+let g:ale_go_langserver_executable = 'gopls'
 let g:airline#extensions#ale#enabled = 1
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
@@ -107,10 +115,10 @@ set nocompatible
 set lazyredraw
 set bg=dark
 set t_Co=256
-set history=500 
-set number ruler 
-set incsearch 
-set hlsearch 
+set history=500
+set number ruler
+set incsearch
+set hlsearch
 set smartcase
 set selectmode=key
 set modeline

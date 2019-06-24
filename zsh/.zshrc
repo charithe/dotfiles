@@ -8,7 +8,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
 zplug 'zchee/zsh-completions', use:'src/go/*.zsh'
 zplug 'docker/cli', use:'contrib/completion/zsh/'
-zplug 'ahmetb/kubectx', use:"completion/*.zsh"
+#zplug 'ahmetb/kubectx', use:"completion/*.zsh"
 zplug 'romkatv/powerlevel10k', use:'powerlevel10k.zsh-theme'
 
 # Install plugins if there are plugins that have not been installed
@@ -32,7 +32,7 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\UE0BC'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\UE0BA'
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs kubecontext)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time time)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
