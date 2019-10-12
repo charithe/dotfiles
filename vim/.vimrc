@@ -5,7 +5,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -24,13 +23,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'jiangmiao/auto-pairs'
-Plug 'hashivim/vim-terraform'
 Plug 'rakr/vim-one'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 Plug 'junegunn/fzf.vim'
-"Plug 'ujihisa/neco-look'
-Plug 'uber/prototool', { 'rtp':'vim/prototool' }
 Plug 'easymotion/vim-easymotion'
 call plug#end()
 
@@ -38,10 +32,8 @@ map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <leader>a :cclose<CR>
-nnoremap <silent> <Space>f :CtrlP<CR>
-nnoremap <silent> <Space>m :CtrlPMixed<CR>
-nnoremap <silent> <Space>r :CtrlPMRU<CR>
-nnoremap <silent> <C-@> :CtrlPBuffer<CR>
+nnoremap <C-@> :Buffers<Cr>
+nnoremap <silent> <Space>t :BTags<Cr>
 
 " Make completion work like an IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -74,7 +66,6 @@ let g:go_highlight_space_tab_error = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
-let g:ctrlp_working_path_mode = 0
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -88,14 +79,12 @@ let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['rls','rustfmt'], 'proto': ['prototool-lint']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--enable-all --fast"
-let g:ale_rust_rls_toolchain = 'stable'
+let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
 let g:ale_sign_error = '❌'
 let g:ale_go_langserver_executable = 'gopls'
 let g:airline#extensions#ale#enabled = 1
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
 
 call deoplete#custom#option('smart_case', v:true)
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
@@ -156,14 +145,13 @@ set clipboard=unnamed
 set splitright
 set splitbelow
 set termguicolors
-
-"highlight NonText ctermfg=30 guifg=#008787
+set mouse=a
+set ttymouse=sgr
 
 syntax on
 filetype plugin indent on
 
 colorscheme one
-"hi SpecialKey guifg=#3f3f3f
 
 call deoplete#custom#source('_', 'converters', ['converter_auto_delimiter', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu', 'converter_auto_paren'])
 
@@ -174,3 +162,10 @@ if executable('rls')
         \ 'whitelist': ['rust'],
         \ })
 endif
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -g "!vendor/*" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
