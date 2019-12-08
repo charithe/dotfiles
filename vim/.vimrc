@@ -49,8 +49,6 @@ let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#pointer = 1
 let g:deoplete#sources#go#builtin_objects = 1
 let g:deoplete#sources#go#unimported_packages = 1
-let g:deoplete#sources#rust#racer_binary= $HOME.'/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path= $HOME.'/git/rust/src'
 let g:go_fmt_command = "goimports"
 let g:go_metalinter_command = "golangci-lint"
 let g:go_highlight_types = 1
@@ -147,11 +145,15 @@ set splitbelow
 set termguicolors
 set mouse=a
 set ttymouse=sgr
+set spell spelllang=en_gb
 
 syntax on
 filetype plugin indent on
 
 colorscheme one
+
+hi SpellBad cterm=underline gui=undercurl ctermfg=Red guifg=Red
+
 
 call deoplete#custom#source('_', 'converters', ['converter_auto_delimiter', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu', 'converter_auto_paren'])
 
@@ -166,6 +168,13 @@ endif
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case -g "!vendor/*" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=* Rgs
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -g "!*_test.go" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
