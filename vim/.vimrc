@@ -62,6 +62,7 @@ let g:go_test_show_name = 1
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_space_tab_error = 1
 let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_string_spellcheck = 1
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 let g:airline_powerline_fonts = 1
@@ -74,7 +75,7 @@ let g:rustfmt_autosave = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['rls','rustfmt'], 'proto': ['prototool-lint']}
+let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['rls','rustfmt'], 'proto': ['prototool-lint'], 'text': ['proselint']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--enable-all --fast"
 let g:ale_rust_rls_toolchain = 'nightly'
@@ -97,6 +98,7 @@ autocmd FileType qf wincmd J
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
 
 set nocompatible
 set lazyredraw
@@ -145,7 +147,7 @@ set splitbelow
 set termguicolors
 set mouse=a
 set ttymouse=sgr
-set spell spelllang=en_gb
+"set spell spelllang=en_gb
 
 syntax on
 filetype plugin indent on
