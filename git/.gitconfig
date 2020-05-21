@@ -1,0 +1,32 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Charith Ellawala
+	email = charith.ellawala@gmail.com
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[alias]
+    lg = log --color --graph --decorate --oneline --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset'
+    ll = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --decorate --oneline --stat
+	s = status
+	co = checkout
+	cane = commit --amend --no-edit
+
+[pull]
+    rebase = true
+
+[gpg]
+    program = gpg2
+
+[rerere]
+	enabled = true
+
+[core]
+    pager = delta --dark --highlight-removed --keep-plus-minus-markers 
+
+[interactive]
+    diffFilter = delta --color-only
+
+

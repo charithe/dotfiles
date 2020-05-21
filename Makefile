@@ -1,2 +1,2 @@
 all:
-	stow -t $(HOME) -S zsh vim kitty
+	stow -t $(HOME) -S zsh vim kitty ripgrep git
