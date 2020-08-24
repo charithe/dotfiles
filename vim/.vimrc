@@ -28,14 +28,20 @@ Plug 'rakr/vim-one'
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
-nmap <F8> :TagbarToggle<CR>
+nmap <F10> :TagbarToggle<CR>
 nnoremap <leader>a :cclose<CR>
 nnoremap <C-@> :Buffers<Cr>
 nnoremap <silent> <Space>t :BTags<Cr>
+" Map j and k to gj/gk, but only when no count is given
+" However, for larger jumps like 6j add the current position to the jump list
+" so that you can use <c-o>/<c-i> to jump to the previous position
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " Make completion work like an IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -56,7 +62,7 @@ nmap <leader>s<right>  :rightbelow vnew<CR>
 nmap <leader>s<up>     :leftabove  new<CR>
 nmap <leader>s<down>   :rightbelow new<CR>
 
-autocmd FileType * call tagbar#autoopen(0)
+"autocmd FileType * call tagbar#autoopen(0)
 
 let g:omni_sql_no_default_maps = 1
 let g:deoplete#enable_at_startup = 1
@@ -104,6 +110,7 @@ let g:airline#extensions#ale#enabled = 1
 
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_buffers_jump = 1
+let g:fzf_preview_window = 'down:50%'
 
 let g:ale_rust_rls_toolchain = ''
 let g:ale_rust_rls_executable = 'rust-analyzer'
@@ -179,9 +186,9 @@ set ttymouse=sgr
 set grepprg=rg\ --vimgrep
 set foldmethod=syntax
 set foldlevel=2
-set foldcolumn=5
-set foldminlines=10
-"set spell spelllang=en_gb
+"set foldcolumn=5
+set foldminlines=15
+set spell spelllang=en_gb
 
 syntax on
 filetype plugin indent on

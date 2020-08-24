@@ -19,7 +19,9 @@ if ! zplug check --verbose; then
     fi
 fi
 
-zplug load 
+zplug load
+
+zstyle ':completion:*' menu yes select
 
 setopt CDABLE_VARS
 setopt auto_cd
@@ -77,6 +79,7 @@ alias vim="gvim -v"
 alias vi="gvim -v"
 alias k="kubectl"
 alias gs="rg -g '!vendor/*' -S"
+alias -s {go,md,rs,txt}=vim
 
 export BAT_THEME="TwoDark"
 export BAT_STYLE="numbers,changes"
