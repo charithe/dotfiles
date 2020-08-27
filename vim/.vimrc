@@ -23,7 +23,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'arzg/vim-colors-xcode'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 
@@ -68,7 +69,7 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 set colorcolumn=120
-set completeopt=longest,menuone
+set completeopt=menuone,popup
 set updatetime=100
 set showbreak=↪\
 set listchars=tab:┆‧,space:‧,eol:↲,nbsp:␣,trail:•,extends:❯,precedes:❮
@@ -142,8 +143,6 @@ let g:fzf_buffers_jump = 1
 let g:fzf_preview_window = 'down:50%'
 
 " airline
-"let g:airline_theme='one'
-let g:airline_theme='xcodedark'
 let g:airline#extensions#ale#enabled = 1
 
 " deoplete
@@ -161,11 +160,12 @@ let g:tagbar_autopreview = 1
 
 syntax on
 filetype plugin indent on
-"colorscheme one
-colorscheme xcodedark
+colorscheme nightfly
 
-"let &t_8u = "\<Esc>[58;2;%lu;%lu;%lum"
-hi SpellBad cterm=underline gui=undercurl ctermbg=NONE guisp=#AB3434
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+hi SpellBad gui=undercurl guisp=red term=undercurl cterm=undercurl
+
 
 " Group local module imports separately
 autocmd FileType go let b:go_fmt_options = {
