@@ -104,6 +104,9 @@ nnoremap <silent> <Space>t :BTags<Cr>
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
+" Delete buffer without closing the whole window
+nnoremap <leader>q :bp<cr>:bd #<cr>
+
 
 "vim-go
 let g:go_test_show_name = 1
@@ -161,6 +164,10 @@ let g:tagbar_autopreview = 1
 
 " peekaboo
 let g:peekaboo_window = "split bo 30new"
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 
 syntax on
