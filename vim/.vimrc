@@ -25,17 +25,12 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'rust-lang/rust.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'reedes/vim-textobj-quote'
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 
-" Map j and k to gj/gk, but only when no count is given
-" However, for larger jumps like 6j add the current position to the jump list
-" so that you can use <c-o>/<c-i> to jump to the previous position
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
 
 set nocompatible
 set lazyredraw
@@ -103,6 +98,13 @@ nnoremap <C-@> :Buffers<Cr>
 " Space+t to show tags
 nnoremap <silent> <Space>t :BTags<Cr>
 
+" Map j and k to gj/gk, but only when no count is given
+" However, for larger jumps like 6j add the current position to the jump list
+" so that you can use <c-o>/<c-i> to jump to the previous position
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+
 "vim-go
 let g:go_test_show_name = 1
 let g:go_auto_type_info = 1
@@ -157,6 +159,9 @@ let g:tagbar_position = "left"
 let g:tagbar_compact = 1
 let g:tagbar_autopreview = 1
 
+" peekaboo
+let g:peekaboo_window = "split bo 30new"
+
 
 syntax on
 filetype plugin indent on
@@ -179,6 +184,20 @@ autocmd vimenter * wincmd p
 
 " Quit when NERDTree is the only window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Set spacing for YAML files
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Set spell check for text file types
+autocmd FileType markdown,md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
+
+" Use smart quotes in text files
+augroup textobj_quote
+  autocmd!
+  autocmd FileType markdown call textobj#quote#init()
+  autocmd FileType textile call textobj#quote#init()
+  autocmd FileType text call textobj#quote#init({'educate': 0})
+augroup END
 
 " Show files with :Files``
 command! -bang -nargs=? -complete=dir Files
