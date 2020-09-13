@@ -83,6 +83,8 @@ set grepprg=rg\ --vimgrep
 set foldmethod=syntax
 set foldlevel=2
 set foldminlines=15
+set spellfile=~/.vim/data/spell/en.utf-8.add
+set spelloptions=camel
 
 " auto-complete settings
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -133,7 +135,7 @@ let g:go_highlight_string_spellcheck = 1
 
 " ale
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'rust': ['rustfmt']}
-let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint']}
+let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--enable-all --fast"
 let g:ale_change_sign_column_color = 1
@@ -204,7 +206,12 @@ augroup textobj_quote
   autocmd FileType markdown call textobj#quote#init()
   autocmd FileType textile call textobj#quote#init()
   autocmd FileType text call textobj#quote#init({'educate': 0})
-augroup END
+augroup end
+
+augroup DragQuickfixWindowDown
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup end
 
 " Show files with :Files``
 command! -bang -nargs=? -complete=dir Files
