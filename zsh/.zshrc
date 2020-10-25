@@ -66,14 +66,22 @@ POWERLEVEL9K_STATUS_ERROR_FOREGROUND="000"
 POWERLEVEL9K_TIME_BACKGROUND="027"
 POWERLEVEL9K_TIME_FOREGROUND="254"
 
-bindkey '^P' up-history
-bindkey '^N' down-history
+#bindkey '^P' up-history
+#bindkey '^N' down-history
 
 # ctrl-w removed word backwards
 bindkey '^w' backward-kill-word
 
 # ctrl-r starts searching history backward
 bindkey '^r' history-incremental-search-backward
+
+# ctrl-n to accept
+bindkey '^n' autosuggest-accept
+# ctrl-enter to accept and execute
+bindkey '^[[M' autosuggest-execute
+# ctrl-space to clear
+bindkey '^ ' autosuggest-clear
+
 
 alias vim="gvim -v"
 alias vi="gvim -v"
@@ -83,6 +91,7 @@ alias -s {go,md,rs,txt}=vim
 
 export BAT_THEME="TwoDark"
 export BAT_STYLE="numbers,changes"
+export LS_COLORS="$(vivid generate snazzy)"
 
 source /usr/share/fzf/shell/key-bindings.zsh
 kitty + complete setup zsh | source /dev/stdin
