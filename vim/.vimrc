@@ -133,6 +133,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_string_spellcheck = 1
 
+" Rust
+let g:rustfmt_autosave = 1
+
 " ale
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'rust': ['rustfmt']}
 let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint']}
