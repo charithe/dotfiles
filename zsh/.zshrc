@@ -8,7 +8,6 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
 zplug 'zchee/zsh-completions', use:'src/go/*.zsh'
 zplug 'docker/cli', use:'contrib/completion/zsh/'
-#zplug 'ahmetb/kubectx', use:"completion/*.zsh"
 zplug 'romkatv/powerlevel10k', use:'powerlevel10k.zsh-theme'
 
 # Install plugins if there are plugins that have not been installed
@@ -26,6 +25,7 @@ zstyle ':completion:*' menu yes select
 setopt CDABLE_VARS
 setopt auto_cd
 setopt hist_ignore_dups
+setopt histignorespace
 cdpath=($HOME $HOME/code $HOME/git $GOPATH/src/github.com/charithe $GOPATH/src $HOME/work)
 
 #RPROMPT='%F{white}%*'
@@ -87,7 +87,10 @@ alias vim="gvim -v"
 alias vi="gvim -v"
 alias k="kubectl"
 alias gs="rg -g '!vendor/*' -S"
+alias tl=" tag ln"
+alias x=" xdg-open"
 alias -s {go,md,rs,txt}=vim
+#alias docker=podman
 
 export BAT_THEME="TwoDark"
 export BAT_STYLE="numbers,changes"
@@ -99,3 +102,5 @@ kitty + complete setup zsh | source /dev/stdin
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/cell/.sdkman"
 [[ -s "/home/cell/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cell/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.poetry/bin:$PATH"

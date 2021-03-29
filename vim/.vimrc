@@ -28,8 +28,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'reedes/vim-textobj-quote'
 Plug 'junegunn/vim-peekaboo'
+Plug 'bufbuild/vim-buf'
+Plug 'tsandall/vim-rego'
 call plug#end()
-
 
 
 set nocompatible
@@ -109,13 +110,19 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 " Delete buffer without closing the whole window
 nnoremap <leader>q :bp<cr>:bd #<cr>
 
+" Shortcuts to help fix lint issues
+nnoremap <C-l> :set makeprg=golangci-lint\ run<cr>:make<cr>
+nnoremap <C-Right> :w<cr>:cn<cr>
+inoremap <C-Right> <esc>:w<cr>:cn<cr>
+
 
 "vim-go
 let g:go_test_show_name = 1
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 let g:go_updatetime = 400
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
 let g:go_imports_autosave = 1
 let g:go_doc_popup_window = 1
 let g:go_def_reuse_buffer = 1
@@ -132,15 +139,17 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_string_spellcheck = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 " Rust
 let g:rustfmt_autosave = 1
 
 " ale
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'rust': ['rustfmt']}
-let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint']}
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'rust': ['rustfmt'], 'python': ['yapf']}
+let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint'], 'proto': ['buflint']}
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = "--enable-all --fast"
+let g:ale_go_golangci_lint_options = "--fast"
 let g:ale_change_sign_column_color = 1
 let g:ale_sign_warning = '❗'
 let g:ale_sign_error = '❌'
@@ -165,7 +174,7 @@ let g:NERDTreeWinPos = "right"
 " Tagbar
 let g:tagbar_position = "left"
 let g:tagbar_compact = 1
-let g:tagbar_autopreview = 1
+let g:tagbar_autopreview = 0
 
 " peekaboo
 let g:peekaboo_window = "split bo 30new"
@@ -174,6 +183,11 @@ let g:peekaboo_window = "split bo 30new"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
+" nightfly theme
+let g:nightflyCursorColor = 1
+let g:nightflyUndercurls = 1
+let g:nightflyTransparent = 0
+
 
 syntax on
 filetype plugin indent on
@@ -181,7 +195,11 @@ colorscheme nightfly
 
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
-hi SpellBad gui=undercurl guisp=red term=undercurl cterm=undercurl
+
+hi SpellBad gui=undercurl guibg=NONE ctermbg=NONE guisp=red term=undercurl cterm=undercurl
+hi SpellCap gui=undercurl  guibg=NONE ctermbg=NONE guisp=blue term=undercurl cterm=undercurl
+hi SpellRare gui=undercurl  guibg=NONE ctermbg=NONE guisp=yellow term=undercurl cterm=undercurl
+hi SpellLocal gui=undercurl  guibg=NONE ctermbg=NONE guisp=blue term=undercurl cterm=undercurl
 
 
 " Group local module imports separately
@@ -189,6 +207,9 @@ autocmd FileType go let b:go_fmt_options = {
     \ 'goimports': '-local ' .
       \ trim(system('{cd '. shellescape(expand('%:h')) .' && go list -m;}')),
     \ }
+
+" Open Tagbar automatically
+autocmd FileType go,rust,make TagbarOpen
 
 " Open NERDTree automatically
 autocmd vimenter * NERDTree
