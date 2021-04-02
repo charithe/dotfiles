@@ -99,8 +99,11 @@ export LS_COLORS="$(vivid generate snazzy)"
 source /usr/share/fzf/shell/key-bindings.zsh
 kitty + complete setup zsh | source /dev/stdin
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/cell/.sdkman"
-[[ -s "/home/cell/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cell/.sdkman/bin/sdkman-init.sh"
+function delete-branches() {
+  git branch |
+    grep --invert-match '\*' |
+    cut -c 3- |
+    fzf --multi --preview="git log {}" |
+    xargs --no-run-if-empty git branch --delete --force
+}
 
-export PATH="$HOME/.poetry/bin:$PATH"

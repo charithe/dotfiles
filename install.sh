@@ -5,7 +5,7 @@ set -euo pipefail
 core() {
     echo "Installing packages"
     sudo dnf -y copr enable gagbo/kitty-latest
-    sudo dnf -y install --refresh zsh vim-X11 vim-enhanced stow fzf ripgrep fd-find bat kitty proselint git-delta
+    sudo dnf -y install --refresh zsh vim-X11 vim-enhanced stow fzf ripgrep fd-find bat kitty proselint git-delta fira-code-fonts
 
     echo "Changing shell"
     chsh -s /bin/zsh
