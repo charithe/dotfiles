@@ -13,6 +13,11 @@
 	s = status
 	co = checkout
 	cane = commit --amend --no-edit
+    sync = "!BRANCH=$(git symbolic-ref --short HEAD) && git fetch upstream && git merge --ff-only upstream/$BRANCH && git push origin $BRANCH" 
+    files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+    stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+    review = !vim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+    reviewone = !vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\" 
 
 [pull]
     rebase = true
@@ -22,12 +27,6 @@
 
 [rerere]
 	enabled = true
-
-#[core]
-#    pager = delta --dark --highlight-removed --keep-plus-minus-markers 
-
-#[interactive]
-#    diffFilter = delta --color-only
 
 [pager]
     log = ~/.cargo/bin/diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33 | /usr/bin/bat
@@ -42,3 +41,11 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = trunk
+[fetch]
+	prune = true
+[format]
+	signOff = true
+[includeIf "gitdir:~/work/**"]
+    path = ~/.gitconfig_work

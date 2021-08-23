@@ -30,6 +30,10 @@ Plug 'reedes/vim-textobj-quote'
 Plug 'junegunn/vim-peekaboo'
 Plug 'bufbuild/vim-buf'
 Plug 'tsandall/vim-rego'
+Plug 'SirVer/ultisnips'
+Plug 'jjo/vim-cue'
+Plug 'towolf/vim-helm'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 
@@ -84,6 +88,8 @@ set grepprg=rg\ --vimgrep
 set foldmethod=syntax
 set foldlevel=2
 set foldminlines=15
+set foldtext=MyFoldText()
+set fillchars+=fold:┈
 set spellfile=~/.vim/data/spell/en.utf-8.add
 set spelloptions=camel
 
@@ -115,6 +121,11 @@ nnoremap <C-l> :set makeprg=golangci-lint\ run<cr>:make<cr>
 nnoremap <C-Right> :w<cr>:cn<cr>
 inoremap <C-Right> <esc>:w<cr>:cn<cr>
 
+" Map jk to ESC
+inoremap jk <esc>
+
+" Delete line without yanking
+nnoremap <Del> "_dd
 
 "vim-go
 let g:go_test_show_name = 1
@@ -141,13 +152,14 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_string_spellcheck = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_build_tags='tests'
 
 " Rust
 let g:rustfmt_autosave = 1
 
 " ale
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'rust': ['rustfmt'], 'python': ['yapf']}
-let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint'], 'proto': ['buflint']}
+let g:ale_linters = {'go': ['golangci-lint', 'gopls'], 'rust': ['analyzer'], 'text': ['proselint'], 'markdown': ['proselint'], 'proto': ['buf-lint']}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--fast"
 let g:ale_change_sign_column_color = 1
@@ -188,10 +200,17 @@ let g:nightflyCursorColor = 1
 let g:nightflyUndercurls = 1
 let g:nightflyTransparent = 0
 
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 syntax on
 filetype plugin indent on
 colorscheme nightfly
+if &diff
+    colorscheme nord
+endif
 
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
@@ -204,9 +223,9 @@ hi SpellLocal gui=undercurl  guibg=NONE ctermbg=NONE guisp=blue term=undercurl c
 
 " Group local module imports separately
 autocmd FileType go let b:go_fmt_options = {
-    \ 'goimports': '-local ' .
-      \ trim(system('{cd '. shellescape(expand('%:h')) .' && go list -m;}')),
-    \ }
+   \ 'goimports': '-local ' .
+     \ trim(system('{cd '. shellescape(expand('%:h')) .' && go list -m;}')),
+   \ }
 
 " Open Tagbar automatically
 autocmd FileType go,rust,make TagbarOpen
@@ -222,7 +241,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Set spell check for text file types
-autocmd FileType markdown,md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
+autocmd FileType asciidoc,markdown,md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
 
 " Use smart quotes in text files
 augroup textobj_quote
@@ -236,6 +255,10 @@ augroup DragQuickfixWindowDown
     autocmd!
     autocmd FileType qf wincmd J
 augroup end
+
+" Automatically open/close the quick fix window when there is data
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 " Show files with :Files``
 command! -bang -nargs=? -complete=dir Files
@@ -256,3 +279,15 @@ command! -bang -nargs=* Rgs
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('down:50%', '?'),
   \   <bang>0)
+
+function! MyFoldText()
+    let line = getline(v:foldstart)
+    let foldedlinecount = v:foldend - v:foldstart + 1
+    let linestart = ' ' . repeat("┈", v:foldlevel) . ' ' . line
+    let lineend = '|' . printf("%10s", foldedlinecount . ' lines') . '|┈'
+    let repeatcount = winwidth(0) - strlen(linestart) - strlen(lineend)
+    return linestart . repeat('┈', repeatcount) . lineend
+endfunction
+
+
+

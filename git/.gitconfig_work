@@ -1,0 +1,9 @@
+[tag]
+	gpgsign = true
+[commit]
+	gpgsign = true
+[user]
+	signingkey = B2F1410BDA6DFC9CB3154971E8C66880127C5E29
+	email = charith@cerbos.dev
+[format]
+	signOff = true

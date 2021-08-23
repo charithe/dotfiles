@@ -90,11 +90,13 @@ alias gs="rg -g '!vendor/*' -S"
 alias tl=" tag ln"
 alias x=" xdg-open"
 alias -s {go,md,rs,txt}=vim
-#alias docker=podman
+alias ls="lsd"
+alias lst="lsd --tree"
 
-export BAT_THEME="TwoDark"
-export BAT_STYLE="numbers,changes"
+#export BAT_THEME="TwoDark"
+#export BAT_STYLE="numbers,changes"
 export LS_COLORS="$(vivid generate snazzy)"
+eval "$(zoxide init zsh)"
 
 source /usr/share/fzf/shell/key-bindings.zsh
 kitty + complete setup zsh | source /dev/stdin
@@ -107,3 +109,5 @@ function delete-branches() {
     xargs --no-run-if-empty git branch --delete --force
 }
 
+
+source /home/cell/.config/broot/launcher/bash/br
