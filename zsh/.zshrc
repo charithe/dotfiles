@@ -6,8 +6,6 @@ source ~/.zplug/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
-zplug 'zchee/zsh-completions', use:'src/go/*.zsh'
-zplug 'docker/cli', use:'contrib/completion/zsh/'
 zplug 'romkatv/powerlevel10k', use:'powerlevel10k.zsh-theme'
 
 # Install plugins if there are plugins that have not been installed
@@ -83,8 +81,8 @@ bindkey '^[[M' autosuggest-execute
 bindkey '^ ' autosuggest-clear
 
 
-alias vim="gvim -v"
-alias vi="gvim -v"
+alias vim="nvim"
+alias vi="nvim"
 alias k="kubectl"
 alias gs="rg -g '!vendor/*' -S"
 alias tl=" tag ln"

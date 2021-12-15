@@ -4,10 +4,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dense-analysis/ale'
-Plug 'rakr/vim-one'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim'
@@ -29,11 +27,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'reedes/vim-textobj-quote'
 Plug 'junegunn/vim-peekaboo'
 Plug 'bufbuild/vim-buf'
-Plug 'tsandall/vim-rego'
 Plug 'SirVer/ultisnips'
-Plug 'jjo/vim-cue'
-Plug 'towolf/vim-helm'
-Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 
@@ -62,7 +56,7 @@ set showmode
 set showcmd
 set hidden
 set wildmenu
-set wildmode=list:longest
+set wildmode=list,longest
 set visualbell
 set ttyfast
 set ruler
@@ -78,7 +72,7 @@ set undodir=~/.vim/data/undo//
 set backupdir=~/.vim/data/backup//
 set directory=~/.vim/data/swap//
 set undofile
-set clipboard=unnamed
+set clipboard=unnamedplus
 set splitright
 set splitbelow
 set termguicolors
@@ -127,12 +121,12 @@ inoremap jk <esc>
 " Delete line without yanking
 nnoremap <Del> "_dd
 
+
 "vim-go
 let g:go_test_show_name = 1
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 let g:go_updatetime = 400
-let g:go_fmt_command="gopls"
 let g:go_gopls_gofumpt=1
 let g:go_imports_autosave = 1
 let g:go_doc_popup_window = 1
@@ -153,6 +147,8 @@ let g:go_highlight_string_spellcheck = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_build_tags='tests'
+let g:go_fmt_command="gopls"
+let g:go_gopls_analyses={"unusedparams": v:true, "fieldalignment": v:true, "nilness": v:true}
 
 " Rust
 let g:rustfmt_autosave = 1
@@ -208,9 +204,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 syntax on
 filetype plugin indent on
 colorscheme nightfly
-if &diff
-    colorscheme nord
-endif
 
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
@@ -288,6 +281,4 @@ function! MyFoldText()
     let repeatcount = winwidth(0) - strlen(linestart) - strlen(lineend)
     return linestart . repeat('┈', repeatcount) . lineend
 endfunction
-
-
 

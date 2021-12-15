@@ -64,7 +64,7 @@ fi
 
 
 export GOPATH=$HOME/code/go
-export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$HOME/.local/bin:$HOME/.arkade/bin
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_CMD='fd --type f'
 export QT_DEVICE_PIXEL_RATIO=auto
