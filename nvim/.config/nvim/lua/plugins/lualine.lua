@@ -125,8 +125,9 @@ require('lualine').setup {
 }
 --]]
 
-require('lualine').setup {
+require('lualine').setup({
   options = {
-    theme = 'tokyonight'
-  }
-}
+    theme = 'tokyonight',
+    section_separators = { left = '', right = '' },
+  },
+})

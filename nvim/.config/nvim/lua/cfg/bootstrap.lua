@@ -38,11 +38,18 @@ return require("packer").startup(function(use)
     use({ 'reedes/vim-textobj-quote' })
     use({ 'junegunn/vim-peekaboo' })
     use({ 'bufbuild/vim-buf' })
-    use({ 'hrsh7th/nvim-cmp' })
     use({ 'hrsh7th/cmp-nvim-lsp' })
     use({ 'saadparwaiz1/cmp_luasnip' })
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'folke/tokyonight.nvim' })
+    use({ 'ray-x/lsp_signature.nvim' })
+
+    use({ 
+        'hrsh7th/nvim-cmp',
+        config = function()
+            require("plugins.cmp")
+        end,
+    })
 
     use({ 
         'neovim/nvim-lspconfig',
@@ -105,6 +112,7 @@ return require("packer").startup(function(use)
             require("plugins.lualine")
         end,
     })
+
     
   if packer_bootstrap then
     vim.notify("Installing plugins...")

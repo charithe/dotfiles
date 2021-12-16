@@ -5,15 +5,16 @@ require('nvim-treesitter.configs').setup({
         enable = enable,
         peek_definition_code = {
           ["DF"] = "@function.outer",
-          ["DF"] = "@class.outer"
         }
       },
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim 
+      lookahead = true,
+
       keymaps = {
-        ["iL"] = {
-          -- you can define your own textobjects directly here
-          go = "(function_definition) @function",
-        },
-        -- or you use the queries from supported languages with textobjects.scm
+        -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["aC"] = "@class.outer",
@@ -28,20 +29,9 @@ require('nvim-treesitter.configs').setup({
         ["as"] = "@statement.outer",
         ["ad"] = "@comment.outer",
         ["am"] = "@call.outer",
-        ["im"] = "@call.inner"
-      },
-    select = {
-      enable = true,
-
-      -- Automatically jump forward to textobj, similar to targets.vim 
-      lookahead = true,
-
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
+        ["im"] = "@call.inner",
+        ["ap"] = "@parameter.outer",
+        ["ip"] = "@parameter.inner",
       },
     },
     swap = {
