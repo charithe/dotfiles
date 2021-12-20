@@ -23,8 +23,6 @@ vim.cmd([[
 return require("packer").startup(function(use)
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'nvim-lua/plenary.nvim' })
-    use({ "junegunn/fzf", run = ":call fzf#install()" })
-    use({ 'junegunn/fzf.vim'})
     use({ "fatih/vim-go", run = ":GoUpdateBinaries", ft = { "go" } })
     use({ 'majutsushi/tagbar' })
     use({ 'tpope/vim-fugitive' })
@@ -39,10 +37,28 @@ return require("packer").startup(function(use)
     use({ 'junegunn/vim-peekaboo' })
     use({ 'bufbuild/vim-buf' })
     use({ 'hrsh7th/cmp-nvim-lsp' })
+    use({ 'hrsh7th/cmp-buffer' })
+    use({ 'hrsh7th/cmp-path' })
     use({ 'saadparwaiz1/cmp_luasnip' })
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'folke/tokyonight.nvim' })
     use({ 'ray-x/lsp_signature.nvim' })
+    use({ 'rafamadriz/friendly-snippets' })
+
+    use({
+        'ibhagwan/fzf-lua',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require'fzf-lua'.setup({
+                grep = {
+                    rg_opts="--column --line-number --no-heading --color=always --smart-case --hidden -g \"!.git/*\""
+                },
+            })
+            vim.cmd[[
+                command! -bang -nargs=* Rg lua require('fzf-lua').grep({search=<q-args>}) 
+            ]]
+        end,
+    })
 
     use({ 
         'hrsh7th/nvim-cmp',

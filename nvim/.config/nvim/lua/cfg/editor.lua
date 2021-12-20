@@ -131,4 +131,6 @@ augroup DragQuickfixWindowDown
     autocmd!
     autocmd FileType qf wincmd J
 augroup end
+
+command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/*" '.shellescape(<q-args>), 1,<bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('down:50%', '?'), <bang>0)
 ]]
