@@ -133,4 +133,10 @@ augroup DragQuickfixWindowDown
 augroup end
 
 command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/*" '.shellescape(<q-args>), 1,<bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('down:50%', '?'), <bang>0)
+
+" Map j and k to gj/gk, but only when no count is given
+" However, for larger jumps like 6j add the current position to the jump list
+" so that you can use <c-o>/<c-i> to jump to the previous position
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 ]]
