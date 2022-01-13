@@ -71,4 +71,5 @@ export QT_DEVICE_PIXEL_RATIO=auto
 export QT_AUTO_SCREEN_SCALE_FACTOR=true
 export REVIEW_BASE=main
 export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
+export KIND_EXPERIMENTAL_PROVIDER=podman
 

@@ -18,6 +18,7 @@
     stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
     review = !vim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
     reviewone = !vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\" 
+    cm = checkout main
 
 [pull]
     rebase = true

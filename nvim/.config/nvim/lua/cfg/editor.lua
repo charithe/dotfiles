@@ -62,7 +62,7 @@ opt.hlsearch = true
 opt.incsearch = true
 opt.laststatus= 2
 opt.lazyredraw = true
-opt.listchars= { tab = "┆‧", space= "‧", eol = "↲", nbsp = "␣" , trail = "•" , extends = "❯" , precedes = "❮" }
+opt.listchars= { tab = "→ ", space = "⋅", eol = "↲", nbsp = "␣" , trail = "•" , extends = "❯", precedes = "❮", }
 opt.modeline = true
 opt.mouse = "a"
 opt.number = true
@@ -91,9 +91,9 @@ opt.visualbell = true
 opt.wildignorecase = true
 opt.wildmenu = true
 opt.wildmode = "list:longest"
---opt.fillchars+=fold:┈
---opt.fillchars+=vert:│
---opt.spellfile=~/.vim/data/spell/en.utf-8.add
+
+opt.fillchars:append("fold:┈")
+opt.fillchars:append("vert:│")
 
 vim.cmd[[
 " colorscheme nightfly
@@ -114,7 +114,7 @@ autocmd vimenter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Set spacing for YAML files
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab 
 
 " Set spell check for text file types
 autocmd FileType asciidoc,markdown,md,rst,tex,text,go,rust setlocal spell spelllang=en_gb

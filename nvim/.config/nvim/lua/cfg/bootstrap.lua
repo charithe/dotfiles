@@ -44,6 +44,7 @@ return require("packer").startup(function(use)
     use({ 'folke/tokyonight.nvim' })
     use({ 'ray-x/lsp_signature.nvim' })
     use({ 'rafamadriz/friendly-snippets' })
+    use({ 'lspcontainers/lspcontainers.nvim' })
 
     use({
         'ibhagwan/fzf-lua',
@@ -95,6 +96,10 @@ return require("packer").startup(function(use)
             require('lint').linters_by_ft = {
                 go = {'golangcilint',},
                 sh = {'shellcheck',},
+                markdown = {'vale',},
+                asciidoc = {'vale',},
+                text = {'vale',},
+                yaml = {'yamllint',},
             }
         end,
     })
@@ -128,6 +133,24 @@ return require("packer").startup(function(use)
             require("plugins.lualine")
         end,
     })
+
+    use({
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+    })
+
+    --[[
+    use({ 
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            require("indent_blankline").setup({
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = true,
+            })
+        end
+    })
+    --]]
 
     
   if packer_bootstrap then

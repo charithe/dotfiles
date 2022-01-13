@@ -90,6 +90,8 @@ alias x=" xdg-open"
 alias -s {go,md,rs,txt}=vim
 alias ls="lsd"
 alias lst="lsd --tree"
+alias htop=btop
+alias top=btop
 
 #export BAT_THEME="TwoDark"
 #export BAT_STYLE="numbers,changes"

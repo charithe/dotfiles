@@ -1,4 +1,7 @@
-require("telescope").setup({
+local actions = require("telescope.actions")
+local telescope = require("telescope")
+
+telescope.setup({
   defaults = {
     vimgrep_arguments = {
       "rg",
@@ -11,6 +14,11 @@ require("telescope").setup({
       "--smart-case",
       "--trim",
     },
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
   },
   pickers = {
     buffers = {
@@ -19,6 +27,8 @@ require("telescope").setup({
     },
   },
 })
+
+telescope.load_extension("fzf")
 
 
 local opts = { noremap = true }

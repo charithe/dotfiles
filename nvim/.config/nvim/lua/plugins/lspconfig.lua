@@ -1,4 +1,5 @@
 lspconfig = require "lspconfig"
+lspcontainers = require "lspcontainers"
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -14,6 +15,7 @@ local on_attach = function(client, bufnr)
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  buf_set_option('formatexpr', 'v:lua.vim.lsp.formatexpr()')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -21,6 +23,7 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -55,10 +58,47 @@ lspconfig.gopls.setup {
         },
         staticcheck = true,
         gofumpt = true,
-        buildFlags = { "-tags=tests" },
+        buildFlags = { "-tags=tests,e2e" },
+        env = { GOFLAGS="-tags=tests,e2e" },
       },
     },
 }
+
+
+lspconfig.jsonls.setup {
+    before_init = function(params)
+        params.processId = vim.NIL
+    end,
+    cmd = lspcontainers.command('jsonls', { container_runtime = "podman", }),
+    root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.yamlls.setup {
+    before_init = function(params)
+        params.processId = vim.NIL
+    end,
+    cmd = lspcontainers.command('yamlls', { container_runtime = "podman", }),
+    root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+    on_attach = on_attach,
+    capabilities = capabilities,
+
+    settings = {
+        redhat = {
+            telemetry = {
+                enabled = false,
+            },
+        },
+        yaml = {
+            format = {
+                enable = true,
+                printWidth = 120,
+            },
+        },
+    },
+}
+
 
 -- Set completeopt to have a better completion experience
 --vim.o.completeopt = 'menuone,noselect'
