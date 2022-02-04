@@ -1,0 +1,6 @@
+extends: spelling
+message: "Did you really mean '%s'?"
+level: warning
+dicpath: /home/cell/code/dotfiles/vale/dicts
+dictionaries:
+  - en_GB

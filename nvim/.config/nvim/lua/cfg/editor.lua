@@ -36,6 +36,9 @@ vim.g["tagbar_autopreview"] = 0
 vim.g["peekaboo_window"] = "split bo 30new"
 vim.g["nightflyCursorColor"] = 1
 vim.g["nightflyUndercurls"] = 1
+vim.g["vista_sidebar_position"] = "vertical topleft"
+vim.g["vista_stay_on_open"] = 0
+vim.g["vista_executive_for"] = { go="nvim_lsp", rust="nvim_lsp" }
 
 -- other options
 local opt = vim.opt
@@ -106,6 +109,7 @@ autocmd BufWritePost <buffer> lua require('lint').try_lint()
 " Open Tagbar automatically
 autocmd FileType go,rust,make TagbarOpen
 
+
 " Open NERDTree automatically
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd p
@@ -131,6 +135,9 @@ augroup DragQuickfixWindowDown
     autocmd!
     autocmd FileType qf wincmd J
 augroup end
+
+" Move to last cursor location
+autocmd BufRead * autocmd FileType <buffer> ++once if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
 
 command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/*" '.shellescape(<q-args>), 1,<bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('down:50%', '?'), <bang>0)
 
