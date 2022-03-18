@@ -58,8 +58,8 @@ lspconfig.gopls.setup {
         },
         staticcheck = true,
         gofumpt = true,
-        buildFlags = { "-tags=tests,e2e" },
-        env = { GOFLAGS="-tags=tests,e2e" },
+        buildFlags = { "-tags=tests,e2e,integration" },
+        env = { GOFLAGS="-tags=tests,e2e,integration" },
       },
     },
 }

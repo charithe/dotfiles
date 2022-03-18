@@ -91,6 +91,7 @@ opt.undodir = vim.fn.stdpath("data") .. "/undo"
 opt.undofile = true
 opt.updatetime= 1000
 opt.visualbell = true
+opt.whichwrap = "<,>,h,l"
 opt.wildignorecase = true
 opt.wildmenu = true
 opt.wildmode = "list:longest"

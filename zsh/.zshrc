@@ -92,6 +92,7 @@ alias ls="lsd"
 alias lst="lsd --tree"
 alias htop=btop
 alias top=btop
+alias rg="kitty +kitten hyperlinked_grep"
 
 #export BAT_THEME="TwoDark"
 #export BAT_STYLE="numbers,changes"

@@ -29,13 +29,20 @@
 [rerere]
 	enabled = true
 
-[pager]
-    log = ~/.cargo/bin/diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33 | /usr/bin/bat
-    show = ~/.cargo/bin/diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33 | /usr/bin/bat
-    diff = ~/.cargo/bin/diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33 | /usr/bin/bat
+[core]
+    pager = delta
+
+[delta]
+    features = decorations
+    side-by-side = true
+    syntax-theme = Dracula
+    dark = true
+    hyperlinks = true
+    line-numbers = true
+    pager = less
 
 [interactive]
-    diffFilter = ~/.cargo/bin/diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33
+    difffilter = delta --color-only --features=interactive
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -43,7 +50,7 @@
 	process = git-lfs filter-process
 	required = true
 [init]
-	defaultBranch = trunk
+	defaultBranch = main
 [fetch]
 	prune = true
 [format]

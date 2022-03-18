@@ -138,6 +138,17 @@ return require("packer").startup(function(use)
         run = 'make',
     })
 
+    use({ 
+        'windwp/nvim-autopairs',
+        config = function()
+            require("plugins.autopairs")
+        end,
+        requires = {
+            {'nvim-treesitter/nvim-treesitter'},
+            {'hrsh7th/nvim-cmp'},
+        }
+    })
+
     --[[
     use({ 
         'lukas-reineke/indent-blankline.nvim',
