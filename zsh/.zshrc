@@ -7,6 +7,7 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'sorin-ionescu/prezto'
 zplug 'romkatv/powerlevel10k', use:'powerlevel10k.zsh-theme'
+zplug 'softmoth/zsh-vim-mode'
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -112,3 +113,4 @@ function delete-branches() {
 
 
 source /home/cell/.config/broot/launcher/bash/br
+

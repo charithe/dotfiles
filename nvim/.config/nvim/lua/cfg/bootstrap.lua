@@ -44,6 +44,15 @@ return require("packer").startup(function(use)
     use({ 'ray-x/lsp_signature.nvim' })
     use({ 'rafamadriz/friendly-snippets' })
     use({ 'lspcontainers/lspcontainers.nvim' })
+    use({ 'p00f/nvim-ts-rainbow' })
+
+
+    use({ 
+        'simrat39/rust-tools.nvim',
+        config = function()
+            require("rust-tools").setup({})
+        end,
+    })
 
     use({
         'ibhagwan/fzf-lua',
@@ -148,20 +157,6 @@ return require("packer").startup(function(use)
             {'hrsh7th/nvim-cmp'},
         }
     })
-
-    --[[
-    use({ 
-        'lukas-reineke/indent-blankline.nvim',
-        config = function()
-            require("indent_blankline").setup({
-                space_char_blankline = " ",
-                show_current_context = true,
-                show_current_context_start = true,
-            })
-        end
-    })
-    --]]
-
     
   if packer_bootstrap then
     vim.notify("Installing plugins...")

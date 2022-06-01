@@ -36,6 +36,7 @@ vim.g["tagbar_autopreview"] = 0
 vim.g["peekaboo_window"] = "split bo 30new"
 vim.g["nightflyCursorColor"] = 1
 vim.g["nightflyUndercurls"] = 1
+vim.g["rustfmt_autosave"] = 1
 vim.g["vista_sidebar_position"] = "vertical topleft"
 vim.g["vista_stay_on_open"] = 0
 vim.g["vista_executive_for"] = { go="nvim_lsp", rust="nvim_lsp" }
@@ -50,7 +51,7 @@ opt.backupdir = vim.fn.stdpath("data") .. "/backup"
 opt.clipboard = "unnamedplus"
 opt.colorcolumn = "120"
 opt.colorcolumn = "120"
-opt.completeopt = { "menu", "menuone", "preview" }
+opt.completeopt = { "menu", "menuone", "preview", "noselect" }
 opt.directory = vim.fn.stdpath("data") .. "/swap"
 opt.encoding = "utf-8"
 opt.expandtab = true

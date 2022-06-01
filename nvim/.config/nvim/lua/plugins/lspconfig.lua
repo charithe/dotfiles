@@ -64,7 +64,6 @@ lspconfig.gopls.setup {
     },
 }
 
-
 lspconfig.jsonls.setup {
     before_init = function(params)
         params.processId = vim.NIL
@@ -79,7 +78,7 @@ lspconfig.yamlls.setup {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = lspcontainers.command('yamlls', { container_runtime = "podman", }),
+    cmd = lspcontainers.command('yamlls', { container_runtime = "podman", network = "bridge", }),
     root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
     on_attach = on_attach,
     capabilities = capabilities,
@@ -94,6 +93,31 @@ lspconfig.yamlls.setup {
             format = {
                 enable = true,
                 printWidth = 120,
+            },
+        },
+    },
+}
+
+lspconfig.pyright.setup {
+    before_init = function(params)
+      params.processId = vim.NIL
+    end,
+    cmd = lspcontainers.command('pyright', { container_runtime = "podman", }),
+    root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = {
+                runBuildScripts = true,
+            },
+            checkOnSave = {
+                command = "clippy"
             },
         },
     },

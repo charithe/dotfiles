@@ -16,5 +16,10 @@ require('nvim-treesitter.configs').setup({
       "make",
       "rust",
       "yaml",
+      "python",
   },
+  rainbow = {
+      enable = true,
+      extended_mode = true,
+  }
 })
