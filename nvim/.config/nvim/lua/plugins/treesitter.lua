@@ -17,6 +17,7 @@ require('nvim-treesitter.configs').setup({
       "rust",
       "yaml",
       "python",
+      "hcl",
   },
   rainbow = {
       enable = true,

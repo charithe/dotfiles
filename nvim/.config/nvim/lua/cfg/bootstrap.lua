@@ -45,9 +45,11 @@ return require("packer").startup(function(use)
     use({ 'rafamadriz/friendly-snippets' })
     use({ 'lspcontainers/lspcontainers.nvim' })
     use({ 'p00f/nvim-ts-rainbow' })
+    use({ 'terrastruct/d2-vim'})
+    use({ 'hashivim/vim-terraform'})
 
 
-    use({ 
+    use({
         'simrat39/rust-tools.nvim',
         config = function()
             require("rust-tools").setup({})
@@ -64,41 +66,41 @@ return require("packer").startup(function(use)
                 },
             })
             vim.cmd[[
-                command! -bang -nargs=* Rg lua require('fzf-lua').grep({search=<q-args>}) 
+                command! -bang -nargs=* Rg lua require('fzf-lua').grep({search=<q-args>})
             ]]
         end,
     })
 
-    use({ 
+    use({
         'hrsh7th/nvim-cmp',
         config = function()
             require("plugins.cmp")
         end,
     })
 
-    use({ 
+    use({
         'neovim/nvim-lspconfig',
         config = function()
             require("plugins.lspconfig")
         end,
     })
 
-    use({ 
-        'nvim-treesitter/nvim-treesitter', 
+    use({
+        'nvim-treesitter/nvim-treesitter',
         run = ":TSUpdate",
         config = function()
             require("plugins.treesitter")
         end,
     })
 
-    use({ 
+    use({
         'nvim-treesitter/nvim-treesitter-textobjects',
         config = function()
             require("plugins.tstextobjects")
         end,
     })
 
-    use({ 
+    use({
         'mfussenegger/nvim-lint',
         config = function()
             require('lint').linters_by_ft = {
@@ -112,14 +114,14 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({ 
+    use({
         'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup()
         end,
     })
 
-    use({ 
+    use({
         'folke/trouble.nvim',
         config = function()
             require("plugins.trouble")
@@ -127,7 +129,7 @@ return require("packer").startup(function(use)
         requires = "kyazdani42/nvim-web-devicons",
     })
 
-    use({ 
+    use({
         'nvim-telescope/telescope.nvim',
         config = function()
             require("plugins.telescope")
@@ -135,7 +137,7 @@ return require("packer").startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     })
 
-    use({ 
+    use({
         'nvim-lualine/lualine.nvim',
         config = function()
             require("plugins.lualine")
@@ -147,7 +149,7 @@ return require("packer").startup(function(use)
         run = 'make',
     })
 
-    use({ 
+    use({
         'windwp/nvim-autopairs',
         config = function()
             require("plugins.autopairs")
@@ -157,7 +159,15 @@ return require("packer").startup(function(use)
             {'hrsh7th/nvim-cmp'},
         }
     })
-    
+
+    use({
+      'phaazon/hop.nvim',
+      branch = 'v2', -- optional but strongly recommended
+      config = function()
+        require("plugins.hop")
+      end,
+    })
+
   if packer_bootstrap then
     vim.notify("Installing plugins...")
     require("packer").sync()

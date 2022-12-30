@@ -94,6 +94,7 @@ alias lst="lsd --tree"
 alias htop=btop
 alias top=btop
 alias rg="kitty +kitten hyperlinked_grep"
+alias j=just
 
 #export BAT_THEME="TwoDark"
 #export BAT_STYLE="numbers,changes"
@@ -114,3 +115,7 @@ function delete-branches() {
 
 source /home/cell/.config/broot/launcher/bash/br
 
+function tere() {
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+}

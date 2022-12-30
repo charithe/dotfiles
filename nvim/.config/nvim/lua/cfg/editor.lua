@@ -33,6 +33,8 @@ vim.g["NERDTreeWinPos"] = "right"
 vim.g["tagbar_position"] = "left"
 vim.g["tagbar_compact"] = 1
 vim.g["tagbar_autopreview"] = 0
+vim.g["terraform_fmt_on_save"] = 1
+vim.g["terraform_align"] = 1
 vim.g["peekaboo_window"] = "split bo 30new"
 vim.g["nightflyCursorColor"] = 1
 vim.g["nightflyUndercurls"] = 1
@@ -120,7 +122,7 @@ autocmd vimenter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Set spacing for YAML files
-" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab 
+" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Set spell check for text file types
 autocmd FileType asciidoc,markdown,md,rst,tex,text,go,rust setlocal spell spelllang=en_gb
@@ -138,6 +140,12 @@ augroup DragQuickfixWindowDown
     autocmd FileType qf wincmd J
 augroup end
 
+" Strip trailing spaces
+augroup TrimTrailingWhitespaces
+    au!
+    au BufWritePre * :lua trim_trailing_whitespaces()
+augroup END
+
 " Move to last cursor location
 autocmd BufRead * autocmd FileType <buffer> ++once if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
 
@@ -148,4 +156,11 @@ command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-hea
 " so that you can use <c-o>/<c-i> to jump to the previous position
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" Terraform
+silent! autocmd! filetypedetect BufRead,BufNewFile *.tf
+autocmd BufRead,BufNewFile *.hcl set filetype=hcl
+autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl
+autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform
+autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json
 ]]

@@ -64,6 +64,7 @@ fi
 
 
 export GOPATH=$HOME/code/go
+export GOPRIVATE=github.com/cerbos/cloud-api
 export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$HOME/.local/bin:$HOME/.arkade/bin:$HOME/.pyprojectx
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_CMD='fd --type f'

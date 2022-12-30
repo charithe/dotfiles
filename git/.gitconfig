@@ -57,3 +57,5 @@
 	signOff = true
 [includeIf "gitdir:~/work/**"]
     path = ~/.gitconfig_work
+[diff]
+	submodule = log

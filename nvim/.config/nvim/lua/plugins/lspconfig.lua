@@ -68,7 +68,7 @@ lspconfig.jsonls.setup {
     before_init = function(params)
         params.processId = vim.NIL
     end,
-    cmd = lspcontainers.command('jsonls', { container_runtime = "podman", }),
+    cmd = lspcontainers.command('jsonls', { container_runtime = "podman", network = "bridge", }),
     root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
     on_attach = on_attach,
     capabilities = capabilities,
@@ -98,6 +98,17 @@ lspconfig.yamlls.setup {
     },
 }
 
+lspconfig.terraformls.setup {
+    before_init = function(params)
+        params.processId = vim.NIL
+    end,
+    cmd = lspcontainers.command('terraformls', { container_runtime = "podman", network = "bridge", }),
+    filetypes = { "hcl", "tf", "terraform", "tfvars" },
+    root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
 lspconfig.pyright.setup {
     before_init = function(params)
       params.processId = vim.NIL
@@ -122,6 +133,7 @@ lspconfig.rust_analyzer.setup {
         },
     },
 }
+
 
 
 -- Set completeopt to have a better completion experience
