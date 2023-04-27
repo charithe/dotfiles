@@ -64,7 +64,6 @@ fi
 
 
 export GOPATH=$HOME/code/go
-export GOPRIVATE=github.com/cerbos/cloud-api
 export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$HOME/.local/bin:$HOME/.arkade/bin:$HOME/.pyprojectx
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_CMD='fd --type f'
@@ -73,3 +72,4 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=true
 export REVIEW_BASE=main
 export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
 export KIND_EXPERIMENTAL_PROVIDER=podman
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True

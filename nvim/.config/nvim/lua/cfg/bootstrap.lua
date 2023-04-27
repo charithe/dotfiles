@@ -21,7 +21,7 @@ vim.cmd([[
 ]])
 
 return require("packer").startup(function(use)
-    use({ 'kyazdani42/nvim-web-devicons' })
+    use({ 'nvim-tree/nvim-web-devicons' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ "fatih/vim-go", run = ":GoUpdateBinaries", ft = { "go" } })
     use({ 'majutsushi/tagbar' })
@@ -47,6 +47,7 @@ return require("packer").startup(function(use)
     use({ 'p00f/nvim-ts-rainbow' })
     use({ 'terrastruct/d2-vim'})
     use({ 'hashivim/vim-terraform'})
+    use({ 'NoahTheDuke/vim-just'})
 
 
     use({
@@ -58,7 +59,7 @@ return require("packer").startup(function(use)
 
     use({
         'ibhagwan/fzf-lua',
-        requires = { 'kyazdani42/nvim-web-devicons' },
+        requires = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require'fzf-lua'.setup({
                 grep = {
@@ -126,7 +127,7 @@ return require("packer").startup(function(use)
         config = function()
             require("plugins.trouble")
         end,
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
     })
 
     use({

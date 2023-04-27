@@ -27,13 +27,17 @@ setopt hist_ignore_dups
 setopt histignorespace
 cdpath=($HOME $HOME/code $HOME/git $GOPATH/src/github.com/charithe $GOPATH/src $HOME/work)
 
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #RPROMPT='%F{white}%*'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\UE0BC'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\UE0BA'
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs background_jobs custom_empty kubecontext)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time time)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
@@ -47,7 +51,7 @@ POWERLEVEL9K_DIR_HOME_FOREGROUND='254'
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='027'
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='254'
 
-POWERLEVEL9K_KUBECONTEXT_BACKGROUND='093'
+POWERLEVEL9K_KUBECONTEXT_BACKGROUND='031'
 POWERLEVEL9K_KUBECONTEXT_FOREGROUND='254'
 
 POWERLEVEL9K_VCS_CLEAN_BACKGROUND="055"
@@ -64,6 +68,10 @@ POWERLEVEL9K_STATUS_ERROR_FOREGROUND="000"
 
 POWERLEVEL9K_TIME_BACKGROUND="027"
 POWERLEVEL9K_TIME_FOREGROUND="254"
+
+POWERLEVEL9K_CUSTOM_EMPTY="echo '🕱'"
+POWERLEVEL9K_CUSTOM_EMPTY_BACKGROUND="000"
+POWERLEVEL9K_CUSTOM_EMPTY_FOREGROUND="196"
 
 #bindkey '^P' up-history
 #bindkey '^N' down-history
@@ -95,6 +103,7 @@ alias htop=btop
 alias top=btop
 alias rg="kitty +kitten hyperlinked_grep"
 alias j=just
+alias df=duf
 
 #export BAT_THEME="TwoDark"
 #export BAT_STYLE="numbers,changes"
@@ -119,3 +128,9 @@ function tere() {
     local result=$(command tere "$@")
     [ -n "$result" ] && cd -- "$result"
 }
+
+export NVM_DIR="$HOME/apps/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
